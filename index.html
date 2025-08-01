@@ -282,7 +282,11 @@
     window.open(`https://wa.me/573102689105?text=${mensaje}`, "_blank");
   }
 
-  
+    const video = document.getElementById('miVideo');
+    video.muted = false;
+    video.play().catch((error) => {
+      console.warn("El navegador bloqueó la reproducción automática con audio. Requiere interacción del usuario.");
+    });
 </script>
 
 </body>
