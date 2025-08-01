@@ -11,24 +11,6 @@
       color: #fff;
       font-family: 'Segoe UI', sans-serif;
       animation: fadeIn 1s ease-in;
-        margin: 0;
-      padding: 0;
-      background-color: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-     .video-wrapper {
-      width: 100%;
-      max-width: 720px;
-      padding: 0 10px;
-    }
-
-    video {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-10px); }
@@ -64,27 +46,22 @@
     #resumenDatos {
       white-space: pre-line;
     }
-
-   
   </style>
 </head>
 <body>
 
 <div class="container mt-4">
   <div id="consentimiento" class="form-section text-center">
-    <img src="imagen/movistar.webp" width="100%" alt="Intro">
+    <img src="https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif" width="100%" alt="Intro">
     <h2 class="mt-3">Tratamiento de datos</h2>
-    <p>PARA CONTINUAR, ES IMPORTANTE CONOCER SI VOLUNTARIAMENTE ACEPTAS SUMINISTRAR TUS DATOS PERSONALES <br><br>
-    <strong style="color: green;">ARTÍCULO 5 LEY 1581 DE 2012</strong></p>
+    <p>PARA CONTINUAR, ES IMPORTANTE CONOCER SI VOLUNTARIAMENTE ACEPTAS SUMINISTRAR TUS DATOS PERSONALES
+    ARTÍCULO 5 LEY 1581 DE 2012</p>
     <button class="btn btn-custom me-2" onclick="mostrarFormulario()">Acepto suministrar</button>
     <button class="btn btn-danger" onclick="alert('Sin aceptar tratamiento de datos no es posible enviarle el servicio')">No acepto</button>
   </div>
 
   <form id="formulario" class="form-section d-none">
-     <video id="miVideo" width="640" height="360" autoplay controls>
-    <source src="video/video movistar.mp4" type="video/mp4">
-    Tu navegador no soporta el elemento de video.
-  </video>
+    <img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" width="100%" style="height: 60vh; object-fit: cover;" alt="Encabezado">
     <div class="row mt-4">
       <div class="col-md-6">
         <label>Nombre completo</label>
@@ -95,6 +72,7 @@
         <select id="tipoDocumento" class="form-control" required>
           <option value="">Seleccione</option>
           <option value="CC">Cédula de Ciudadanía</option>
+          <option value="TI">Tarjeta de Identidad</option>
           <option value="CE">Cédula de Extranjería</option>
         </select>
       </div>
@@ -140,38 +118,22 @@
       </div>
       <div class="col-md-6">
         <label>Celular</label>
-        <input type="tel" id="celular" class="form-control">
+        <input type="tel" id="celular" class="form-control" required>
       </div>
-    <div class="col-md-6">
-  <label>Plan</label>
-  <select id="plan" class="form-control" onchange="actualizarValorPlan()" required>
-    <option value="">Seleccione...</option>
-    <optgroup label="🟦 TRIO">
-      <option value="TRIO1">Internet 900MB + TV 74 Canales</option>
-      <option value="TRIO2">Internet 900MB + TV 74 Canales + Disney Plus</option>
-      <option value="TRIO3">Internet 900MB + TV 74 Canales + Win Futbol</option>
-      <option value="TRIO4">Internet 900MB + TV 74 Canales + Netflix (solo estrato 6)</option>
-    </optgroup>
-    <optgroup label="🟩 DUOS">
-      <option value="DUO1">Internet 900MB + TV 9 Canales</option>
-      <option value="DUO2">Internet 900MB + TV 9 Canales + Disney Plus</option>
-      <option value="DUO3">Internet 900MB + TV 9 Canales + Win Futbol</option>
-    </optgroup>
-    <optgroup label="🟨 NAKED">
-      <option value="NAKED1">Internet 900MB + TV 9 Canales</option>
-      <option value="NAKED2">Internet 900MB + TV 9 Canales + Disney Plus</option>
-      <option value="NAKED3">Internet 900MB + TV 9 Canales + Win Futbol</option>
-    </optgroup>
-    <optgroup label="🟥 EXCLUSIVA">
-      <option value="EX1">Internet 900MB + Ilimitado + Win + Perplexity + TV</option>
-      <option value="EX2">Internet 900MB + Ilimitado + Disney + Perplexity + TV</option>
-    </optgroup>
-  </select>
-</div>
-<div class="col-md-6">
-  <label>Valor del plan</label>
-  <input type="text" id="valorPlan" class="form-control" readonly>
-</div>
+      <div class="col-md-6">
+        <label>Plan</label>
+        <select id="plan" class="form-control" onchange="actualizarValorPlan()" required>
+          <option value="">Seleccione...</option>
+          <option value="Básico">Básico</option>
+          <option value="Estándar">Estándar</option>
+          <option value="Premium">Premium</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label>Valor del plan</label>
+        <input type="text" id="valorPlan" class="form-control" readonly>
+      </div>
+    </div>
     <div class="mt-4 text-center">
       <button type="button" class="btn btn-custom" onclick="mostrarResumen()">Enviar</button>
       <button type="button" class="btn btn-danger" onclick="motivoCancelacion()">Cancelar</button>
@@ -209,33 +171,11 @@
     document.getElementById("formulario").classList.remove("d-none");
   }
 
- function actualizarValorPlan() {
-  const plan = document.getElementById("plan").value;
-  const estrato = document.getElementById("estrato").value;
-  let valor = "";
-  if (plan === "TRIO4" && estrato !== "6") {
-    alert("El plan TRIO4 (con Netflix) solo está disponible para estrato 6");
-    document.getElementById("plan").value = "";
-    document.getElementById("valorPlan").value = "";
-    return;
+  function actualizarValorPlan() {
+    const plan = document.getElementById("plan").value;
+    const valor = plan === "Básico" ? 30000 : plan === "Estándar" ? 50000 : plan === "Premium" ? 70000 : "";
+    document.getElementById("valorPlan").value = valor;
   }
-  switch(plan) {
-    case "TRIO1": valor = "$92.393"; break;
-    case "TRIO2": valor = "$100.093"; break;
-    case "TRIO3": valor = "$102.893"; break;
-    case "TRIO4": valor = "$111.293"; break;
-    case "DUO1": valor = "$65.093"; break;
-    case "DUO2": valor = "$72.793"; break;
-    case "DUO3": valor = "$74.193"; break;
-    case "NAKED1": valor = "$62.993"; break;
-    case "NAKED2": valor = "$70.693"; break;
-    case "NAKED3": valor = "$72.093"; break;
-    case "EX1": valor = "$89.990"; break;
-    case "EX2": valor = "$89.990"; break;
-    default: valor = "";
-  }
-  document.getElementById("valorPlan").value = valor;
-}
 
   function mostrarResumen() {
     const campos = ["nombre", "tipoDocumento", "numeroDocumento", "fechaExp", "fechaNac", "email", "direccion", "ciudad", "barrio", "estrato", "celular", "plan", "valorPlan"];
@@ -281,12 +221,6 @@
     const mensaje = encodeURIComponent("🚀 NUEVO FORMULARIO:\n" + datos);
     window.open(`https://wa.me/573103509843?text=${mensaje}`, "_blank");
   }
-
-    const video = document.getElementById('miVideo');
-    video.muted = false;
-    video.play().catch((error) => {
-      console.warn("El navegador bloqueó la reproducción automática con audio. Requiere interacción del usuario.");
-    });
 </script>
 
 </body>
