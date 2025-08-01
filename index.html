@@ -46,6 +46,23 @@
     #resumenDatos {
       white-space: pre-line;
     }
+
+     .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+      height: 0;
+      overflow: hidden;
+    }
+
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ajusta el video al contenedor manteniendo la proporción */
+    }
   </style>
 </head>
 <body>
@@ -224,6 +241,12 @@
     const mensaje = encodeURIComponent("🚀 NUEVO FORMULARIO:\n" + datos);
     window.open(`https://wa.me/573103509843?text=${mensaje}`, "_blank");
   }
+
+    const video = document.getElementById('miVideo');
+    video.muted = false;
+    video.play().catch((error) => {
+      console.warn("El navegador bloqueó la reproducción automática con audio. Requiere interacción del usuario.");
+    });
 </script>
 
 </body>
